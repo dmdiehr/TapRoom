@@ -14,6 +14,7 @@ import { Keg } from './keg.model';
       <label>{{ keg.price }}</label>
       <label>{{ keg.abv }}</label>
       <label>{{ keg.volume }}</label>
+
     </div>
   `
 })

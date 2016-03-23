@@ -6,12 +6,18 @@ import {Keg} from './keg.model';
   outputs: ['onSubmitNewKeg'],
   template: `
   <div class="keg-form">
-    <h3>Create Keg:</h3>
-    <input placeholder="name" class="col-sm-8 input-lg" #newName>
-    <input placeholder="Brand" class="col-sm-8 input-lg" #newBrand>
-    <input placeholder="Price Per Pint" class="col-sm-8 input-lg" #newPrice>
-    <input placeholder="Alcohol by Volume" class="col-sm-8 input-lg" #newAbv>
-    <button (click)="addKeg(newName, newBrand, newPrice, newAbv)" class="btn-success btn-lg add-button">Add</button>
+    <h5>Add Keg:</h5>
+    <fieldset class="form-group">
+      <label></label>
+      <input type="text" placeholder="name" #newName><br>
+      <label></label>
+      <input type="text" placeholder="Brand" #newBrand><br>
+      <label></label>
+      <input type="text" placeholder="Price Per Pint" #newPrice><br>
+      <label></label>
+      <input type="text" placeholder="Alcohol by Volume" #newAbv><br>
+      <button (click)="addKeg(newName, newBrand, newPrice, newAbv)" class="btn-success btn-sm">Add</button>
+    </fieldset>
   </div>
   `
 })

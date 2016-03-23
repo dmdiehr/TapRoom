@@ -7,13 +7,13 @@ import {Keg} from './keg.model';
   template: `
     <div class="keg-form">
       <h3>Edit Name: </h3>
-      <input [(ngModel)]="keg.name" class="col-sm-3 input-sm"/>
+      <input [(ngModel)]="keg.name"/>
       <h3>Edit Brand: </h3>
-      <input [(ngModel)]="keg.brand" class="col-sm-3 input-sm"/>
+      <input [(ngModel)]="keg.brand"/>
       <h3>Edit Price: </h3>
-      <input [(ngModel)]="keg.price" class="col-sm-3 input-sm"/>
+      <input [(ngModel)]="keg.price"/>
       <h3>Edit Abv: </h3>
-      <input [(ngModel)]="keg.abv" class="col-sm-3 input-sm"/>
+      <input [(ngModel)]="keg.abv"/>
     </div>
   `
 })
