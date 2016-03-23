@@ -1,4 +1,4 @@
-import { Component} from  'angular2/core';
+import { Component, EventEmitter} from  'angular2/core';
 import { Keg } from './keg.model';
 
 
@@ -7,6 +7,7 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-pour',
   inputs: ['keg'],
+  outputs: ['empty'],
   template: `
     <button (click)="pourBeer()">Pour</button>
   `
@@ -14,9 +15,16 @@ import { Keg } from './keg.model';
 
 export class KegPourComponent {
   public keg: Keg;
-
+  public empty: EventEmitter<Keg>;
+  constructor(){
+    this.empty = new EventEmitter();
+  }
   pourBeer(){
-    this.keg.volume -= 1;
-
+    if (this.keg.volume === 1){
+      this.empty.emit(this.keg);
+    }
+    else{
+      this.keg.volume -= 1;
+    }
   }
 }

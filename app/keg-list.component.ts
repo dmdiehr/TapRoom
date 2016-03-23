@@ -13,42 +13,7 @@ import {KegPourComponent} from './keg-pour.component';
   inputs: ['kegList'],
   outputs: ['onKegSelect'],
   directives: [KegComponent, EditKegDetailsComponent, NewKegComponent, KegPourComponent],
-  template: `
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <div id="tappedDiv">
-          <h5>Tapped Kegs</h5>
-          <div *ngFor="#currentKeg of kegList | tapped:filterTapped">
-            <keg-display
-              (click)="kegClicked(currentKeg)"
-              [class.selected]="currentKeg === selectedKeg"
-              [keg]="currentKeg">
-            </keg-display>
-            <keg-pour [keg]="currentKeg">
-            </keg-pour>
-          </div>
-
-
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div id="notTappedDiv">
-          <h5>Inventory</h5>
-          <keg-display *ngFor="#currentKeg of kegList | tapped:filterNotTapped"
-            (click)="kegClicked(currentKeg)"
-            [class.selected]="currentKeg === selectedKeg"
-            [keg]="currentKeg">
-          </keg-display>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <new-keg (onSubmitNewKeg)="createKeg($event)"></new-keg>
-      </div>
-    </div>
-    <edit-keg-details *ngIf="selectedKeg" [keg]="selectedKeg"></edit-keg-details>
-  </div>
-  `
+  templateUrl: 'app/keg-list.component.html'
 })
 export class KegListComponent {
   public filterTapped: string = "tapped";
@@ -70,18 +35,14 @@ export class KegListComponent {
     );
   }
   deleteKeg(keg: Keg): void {
+    console.log("Empty Keg: " + keg.name);
     var kegIndex = this.kegList.indexOf(keg);
-    this.kegList.slice(kegIndex, 1);
+    console.log("Keg Inded: " + kegIndex);
+    this.kegList.splice(kegIndex, 1);
+    console.log("Keg List After Slice: " + this.kegList)
   }
   onChange(filterOption){
     this.filterTapped = filterOption;
     console.log(this.filterTapped);
   }
 }
-
-
-// <select (change)="onChange($event.target.value)" class="filter">
-//   <option value="all" selected="selected">Full Inventory</option>
-//   <option value="notTapped">Untapped</option>
-//   <option value="tapped">Tapped</option>
-// </select>
