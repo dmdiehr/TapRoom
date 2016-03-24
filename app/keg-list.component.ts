@@ -7,7 +7,6 @@ import { TappedPipe } from './tapped.pipe';
 import {KegPourComponent} from './keg-pour.component';
 import {KegSortComponent} from './keg-sort.component';
 
-
 @Component({
   selector: 'keg-list',
   pipes: [TappedPipe],
@@ -26,9 +25,12 @@ export class KegListComponent {
     this.onKegSelect = new EventEmitter();
   }
   kegClicked(clickedKeg: Keg): void {
-    console.log(clickedKeg);
-    this.selectedKeg = clickedKeg;
-    this.onKegSelect.emit(clickedKeg);
+    if (this.selectedKeg === clickedKeg){
+      this.selectedKeg = null;
+    }
+    else {
+      this.selectedKeg = clickedKeg;
+    }
   }
   createKeg(beerArray: string[]): void {
     this.kegList.push(
@@ -41,7 +43,6 @@ export class KegListComponent {
   }
   onChange(filterOption){
     this.filterTapped = filterOption;
-    console.log(this.filterTapped);
   }
   onSort(sortParameter){
     var clonedList = [];
@@ -50,27 +51,83 @@ export class KegListComponent {
     }
     if(sortParameter === "sort-name"){
       var sortedList = [];
-      console.log("In if statement");
       for(var i=0; i<this.kegList.length; i++){
-        console.log("Outer Loop");
         var lowItem = new Keg("zzz", "zzz", 99, 99);
         for(var item of clonedList){
-          console.log("Inner Loop");
           if (item.name.toLowerCase() < lowItem.name.toLowerCase()){
-            console.log("Inner If");
             lowItem = item;
-            console.log("LowItem: " + lowItem.name);
-
           }
         }
         sortedList.push(lowItem);
         var kegIndex = clonedList.indexOf(lowItem);
         clonedList.splice(kegIndex, 1);
-        console.log("End Loop");
       }
-      console.log("Before: " + this.kegList[0].name);
       this.kegList = sortedList;
-      console.log("After: " + this.kegList[0].name);
+    }
+
+    if(sortParameter === "sort-brand"){
+      var sortedList = [];
+      for(var i=0; i<this.kegList.length; i++){
+        var lowItem = new Keg("zzz", "zzz", 99, 99);
+        for(var item of clonedList){
+          if (item.brand.toLowerCase() < lowItem.brand.toLowerCase()){
+            lowItem = item;
+          }
+        }
+        sortedList.push(lowItem);
+        var kegIndex = clonedList.indexOf(lowItem);
+        clonedList.splice(kegIndex, 1);
+      }
+      this.kegList = sortedList;
+    }
+
+    if(sortParameter === "sort-price"){
+      var sortedList = [];
+      for(var i=0; i<this.kegList.length; i++){
+        var lowItem = new Keg("zzz", "zzz", 99, 99);
+        for(var item of clonedList){
+          if (item.price < lowItem.price){
+            lowItem = item;
+          }
+        }
+        sortedList.push(lowItem);
+        var kegIndex = clonedList.indexOf(lowItem);
+        clonedList.splice(kegIndex, 1);
+      }
+      this.kegList = sortedList;
+    }
+
+    if(sortParameter === "sort-abv"){
+      var sortedList = [];
+      for(var i=0; i<this.kegList.length; i++){
+        var lowItem = new Keg("zzz", "zzz", 99, 99);
+        for(var item of clonedList){
+          if (item.abv < lowItem.abv){
+            lowItem = item;
+          }
+        }
+        sortedList.push(lowItem);
+        var kegIndex = clonedList.indexOf(lowItem);
+        clonedList.splice(kegIndex, 1);
+      }
+      this.kegList = sortedList;
+    }
+
+    if(sortParameter === "sort-volume"){
+      var sortedList = [];
+      for(var i=0; i<this.kegList.length; i++){
+        var lowItem = new Keg("zzz", "zzz", 99, 99);
+        lowItem.volume = 999;
+        for(var item of clonedList){
+          if (item.volume < lowItem.volume){
+            lowItem = item;
+          }
+        }
+        sortedList.push(lowItem);
+        var kegIndex = clonedList.indexOf(lowItem);
+        clonedList.splice(kegIndex, 1);
+      }
+      this.kegList = sortedList;
     }
   }
 }

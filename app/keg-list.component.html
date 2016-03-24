@@ -7,27 +7,27 @@
         <div *ngFor="#currentKeg of kegList | tapped:filterTapped">
           <keg-display
             (click)="kegClicked(currentKeg)"
-            [class.selected]="currentKeg === selectedKeg"
-            [keg]="currentKeg">
+            [class.selected]="currentKeg === selectedKeg" [keg]="currentKeg">
           </keg-display>
           <keg-pour (empty)="deleteKeg($event)" [keg]="currentKeg">
           </keg-pour>
+          <edit-keg-details *ngIf="currentKeg === selectedKeg" [keg]="selectedKeg"></edit-keg-details>
         </div>
       </div>
     </div>
     <div class="col-sm-4">
-      <div id="notTappedDiv">
+      <div  *ngFor="#currentKeg of kegList | tapped:filterNotTapped" id="notTappedDiv">
         <h5>Inventory</h5>
-        <keg-display *ngFor="#currentKeg of kegList | tapped:filterNotTapped"
-          (click)="kegClicked(currentKeg)"
+        <keg-display          (click)="kegClicked(currentKeg)"
           [class.selected]="currentKeg === selectedKeg"
           [keg]="currentKeg">
         </keg-display>
+        <edit-keg-details *ngIf="currentKeg === selectedKeg" [keg]="selectedKeg"></edit-keg-details>
       </div>
     </div>
     <div class="col-sm-4">
       <new-keg (onSubmitNewKeg)="createKeg($event)"></new-keg>
     </div>
   </div>
-  <edit-keg-details *ngIf="selectedKeg" [keg]="selectedKeg"></edit-keg-details>
+
 </div>
