@@ -19,12 +19,10 @@ export class AppComponent {
   public kegs: Keg[];
   constructor(){
     this.kegs = [
-      new Keg("Hefeweizen", "Widmer", 4, 5),
-      new Keg("Blue Ribbon", "Pabst", 2, 3)
-
-
-
+      new Keg("Hefeweizen", "Widmer", 4, 5)
+      
     ];
+
   }
   kegWasSelected(clickedKeg: Keg): void {
     console.log(clickedKeg);

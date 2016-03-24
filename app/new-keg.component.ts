@@ -21,8 +21,7 @@ import {Keg} from './keg.model';
   </div>
   `
 })
-export class NewKegComponent {
-  public onSubmitNewKeg: EventEmitter<String[]>;
+export class NewKegComponent {  public onSubmitNewKeg: EventEmitter<String[]>;
   constructor(){
     this.onSubmitNewKeg = new EventEmitter();
   }
@@ -33,6 +32,7 @@ export class NewKegComponent {
     beerBrand.value="";
     beerPrice.value="";
     beerAbv.value="";
+
 
   }
 }

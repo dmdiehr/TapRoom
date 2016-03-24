@@ -11,10 +11,9 @@ import { Keg } from './keg.model';
       <input *ngIf="!keg.tapped" type="checkbox" (click)="toggleTapped(true)"/>
       <label>{{ keg.name }}</label>
       <label>{{ keg.brand }}</label>
-      <label>{{ keg.price }}</label>
+      <label>{{ keg.price }} </label>
       <label>{{ keg.abv }}</label>
       <label>{{ keg.volume }}</label>
-
     </div>
   `
 })

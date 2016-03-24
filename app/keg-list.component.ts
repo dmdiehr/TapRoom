@@ -5,6 +5,7 @@ import { EditKegDetailsComponent } from './edit-keg-details.component';
 import { NewKegComponent } from './new-keg.component';
 import { TappedPipe } from './tapped.pipe';
 import {KegPourComponent} from './keg-pour.component';
+import {KegSortComponent} from './keg-sort.component';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {KegPourComponent} from './keg-pour.component';
   pipes: [TappedPipe],
   inputs: ['kegList'],
   outputs: ['onKegSelect'],
-  directives: [KegComponent, EditKegDetailsComponent, NewKegComponent, KegPourComponent],
+  directives: [KegComponent, EditKegDetailsComponent, NewKegComponent, KegPourComponent, KegSortComponent],
   templateUrl: 'app/keg-list.component.html'
 })
 export class KegListComponent {
@@ -35,14 +36,41 @@ export class KegListComponent {
     );
   }
   deleteKeg(keg: Keg): void {
-    console.log("Empty Keg: " + keg.name);
     var kegIndex = this.kegList.indexOf(keg);
-    console.log("Keg Inded: " + kegIndex);
     this.kegList.splice(kegIndex, 1);
-    console.log("Keg List After Slice: " + this.kegList)
   }
   onChange(filterOption){
     this.filterTapped = filterOption;
     console.log(this.filterTapped);
+  }
+  onSort(sortParameter){
+    var clonedList = [];
+    for(var keg of this.kegList){
+      clonedList.push(keg);
+    }
+    if(sortParameter === "sort-name"){
+      var sortedList = [];
+      console.log("In if statement");
+      for(var i=0; i<this.kegList.length; i++){
+        console.log("Outer Loop");
+        var lowItem = new Keg("zzz", "zzz", 99, 99);
+        for(var item of clonedList){
+          console.log("Inner Loop");
+          if (item.name.toLowerCase() < lowItem.name.toLowerCase()){
+            console.log("Inner If");
+            lowItem = item;
+            console.log("LowItem: " + lowItem.name);
+
+          }
+        }
+        sortedList.push(lowItem);
+        var kegIndex = clonedList.indexOf(lowItem);
+        clonedList.splice(kegIndex, 1);
+        console.log("End Loop");
+      }
+      console.log("Before: " + this.kegList[0].name);
+      this.kegList = sortedList;
+      console.log("After: " + this.kegList[0].name);
+    }
   }
 }
